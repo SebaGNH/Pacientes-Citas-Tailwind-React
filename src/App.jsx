@@ -1,10 +1,10 @@
-import {Fragment, useState } from 'react'
+import React,{Fragment} from 'react'
+import Header from './components/Header'
 
-function App() {
-
+const App = () => {
   return (
     <Fragment>
-      <h1>Hola mundo</h1>
+      <Header />
     </Fragment>
   )
 }
