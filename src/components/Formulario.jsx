@@ -5,11 +5,11 @@ const Formulario = () => {
     <div className='md:w-1/2 lg:w-2/5'>
       <h2 className="font-black text-3xl text-center">Formulario</h2>
 
-      <p className='text-lg mt-5'>Añade Pacientes y {' '}
-        <span className='text-indigo-600 font-bold '>Administralos</span>
+      <p className='text-lg mt-5 text-center'>Añade Pacientes y {' '}
+        <span className='text-indigo-400 font-bold '>Administralos</span>
       </p>
 
-      <form action="" className='bg-gray-500 shadow-md rounded-md py-10 px-5 mt-10'>
+      <form action="" className='bg-gray-500 shadow-md rounded-md py-10 px-5 mt-5 mb-10'>
       <div className='mb-5'>
         <label 
           htmlFor="nombreMascota"
