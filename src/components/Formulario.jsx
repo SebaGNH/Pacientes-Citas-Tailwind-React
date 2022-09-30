@@ -1,6 +1,7 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect} from 'react';
+import limpiarCampos from '../Helpers/limpiarCampos';
 
-const Formulario = () => {
+const Formulario = ({setPacientes}) => {
   //Estados
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
@@ -22,7 +23,25 @@ const Formulario = () => {
     }
     setError(false);
 
-    //console.log('Hola')
+    //setCategorias( misCategorias => [inputValue, ...misCategorias]);
+    //Enviamos a App.js
+    setPacientes(pacientes => [...pacientes,  
+      {
+        nombre,
+        propietario,
+        email,
+        fecha,
+        sintomas
+      }]);
+
+    //Limpiar Campos Helper
+    limpiarCampos(
+      setNombre, 
+      setPropietario,
+      setEmail,
+      setFecha,
+      setSintomas
+    );
   }
 
   return (
