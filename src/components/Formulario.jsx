@@ -32,8 +32,13 @@ const Formulario = ({setPacientes}) => {
         propietario,
         email,
         fecha,
-        sintomas
+        sintomas,
+        id: generarID()
       }]);
+
+    const generarID = () => {
+      return Math.random().toString(36).substring(2);
+    }
 
     //Limpiar Campos Helper
     limpiarCampos(
@@ -44,6 +49,10 @@ const Formulario = ({setPacientes}) => {
       setSintomas
     );
   }
+
+
+
+
 
   return (
     <div className='md:w-1/2 lg:w-2/5'>
