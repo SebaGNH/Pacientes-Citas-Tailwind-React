@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Paciente = ({paciente}) => {
+const Paciente = ({paciente,setPaciente}) => {
   
   return (
   <div className="mx-5 my-8 bg-gray-400 shadow-md px-5 py-10 rounded-xl text-base">
@@ -34,6 +34,23 @@ const Paciente = ({paciente}) => {
         >{paciente.sintomas}
       </span>
     </p>
+
+    <div className="flex justify-between mt-10">
+      <button 
+        className='py-2 px-7 mr-2 my-2 bg-indigo-600 hover:bg-indigo-800 text-white font-bold uppercase tracking-widest rounded 
+        transition-colors'
+        type='button'
+        onClick={()=> setPaciente(paciente)}
+        >Editar
+      </button>
+
+      <button 
+        className='py-2 px-7 mr-2 my-2 bg-red-600 hover:bg-red-800 text-white font-bold uppercase tracking-widest rounded
+        transition-colors'
+        type='button'
+        >Eliminar
+      </button>
+    </div>
   </div>
   )
 }

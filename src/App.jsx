@@ -5,6 +5,7 @@ import ListadoPacientes from './components/ListadoPacientes'
 
 const App = () => {
   const [pacientes, setPacientes] = useState([]);
+  const [paciente, setPaciente] = useState({}); 
 
   return (
     <Fragment>
@@ -19,6 +20,7 @@ const App = () => {
           />
           <ListadoPacientes 
             pacientes={pacientes}
+            setPaciente={setPaciente}
           />
         </div>
       </div>
