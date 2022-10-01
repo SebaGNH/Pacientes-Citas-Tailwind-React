@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import limpiarCampos from '../Helpers/limpiarCampos';
+import Error from './Error';
 
 const Formulario = ({setPacientes}) => {
   //Estados
@@ -23,7 +24,7 @@ const Formulario = ({setPacientes}) => {
     }
     setError(false);
 
-    //setCategorias( misCategorias => [inputValue, ...misCategorias]);
+
     //Enviamos a App.js
     setPacientes(pacientes => [...pacientes,  
       {
@@ -48,9 +49,9 @@ const Formulario = ({setPacientes}) => {
     <div className='md:w-1/2 lg:w-2/5'>
       <h2 className="font-black text-3xl text-center">Formulario</h2>
 
-      { 
+      { //Error
         error?
-        <p className='text-lg bg-red-500 text-white text-center mt-2 p-3 font-bold rounded'>Hay campos vacíos</p>
+        <Error>Hay campos vacíos</Error>
       :        
         <p className='text-lg mt-2 p-3 text-center'>Añade Pacientes y {' '}
           <span className='text-indigo-400 font-bold '>Administralos</span>

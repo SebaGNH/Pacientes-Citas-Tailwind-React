@@ -17,7 +17,9 @@ const App = () => {
           <Formulario 
             setPacientes={setPacientes}
           />
-          <ListadoPacientes />
+          <ListadoPacientes 
+            pacientes={pacientes}
+          />
         </div>
       </div>
     </Fragment>
