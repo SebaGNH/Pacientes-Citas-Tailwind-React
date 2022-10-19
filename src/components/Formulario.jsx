@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import limpiarCampos from '../Helpers/limpiarCampos';
 import Error from './Error';
 
-const Formulario = ({setPacientes}) => {
+const  Formulario = ({pacientes,setPacientes,editPaciente}) => {
   //Estados
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
@@ -11,8 +11,24 @@ const Formulario = ({setPacientes}) => {
   const [sintomas, setSintomas] = useState('');
   const [error, setError] = useState(false);
 
+  const generarID = () => {
+    return Math.random().toString(36).substring(2);
+  }
+
+
+  useEffect( () => {
+    //Si tiene un paciente para editar
+    if(Object.keys(editPaciente).length > 0){
+      setNombre(editPaciente.nombre);
+      setPropietario(editPaciente.propietario);
+      setEmail(editPaciente.email);
+      setFecha(editPaciente.fecha);
+      setSintomas(editPaciente.sintomas);
+    }
+  },[editPaciente]);
+
   //Botón Submit
-  const submitHandler = (e) =>{
+  const onSubmit = (e) =>{
     e.preventDefault();
     //Validación del formualrio
     if ([nombre,propietario,email,fecha,sintomas].includes('')) {
@@ -20,25 +36,37 @@ const Formulario = ({setPacientes}) => {
       setError(true);
       return;
     }else{
-      console.log('Todos llenos')
+      //console.log('Todos los campos del formulario están llenos')
     }
     setError(false);
 
-
-    //Enviamos a App.js
-    setPacientes(pacientes => [...pacientes,  
-      {
+    const objetoPaciente = {
         nombre,
         propietario,
         email,
         fecha,
-        sintomas,
-        id: generarID()
-      }]);
+        sintomas
+      }
+    
 
-    const generarID = () => {
-      return Math.random().toString(36).substring(2);
+    if (editPaciente.id) {
+      //const pacientesFiltrados = pacientes.filter(paciente => paciente.id !== editPaciente.id)
+
+      objetoPaciente.id = editPaciente.id;
+
+      const pacientesActualizados = pacientes.map(pacient => pacient.id === editPaciente.id? objetoPaciente : pacient)
+
+      setPacientes(pacientesActualizados);
+    }else{
+      //Enviamos a App.js
+      //Nuevo registro
+      objetoPaciente.id = generarID();
+      setPacientes(pacientes => [...pacientes,         
+        objetoPaciente
+      ]);
     }
+
+
 
     //Limpiar Campos Helper
     limpiarCampos(
@@ -67,7 +95,7 @@ const Formulario = ({setPacientes}) => {
         </p>
       }
 
-      <form onSubmit={submitHandler} className='bg-gray-500 shadow-md rounded-md py-10 px-5 mt-5 mb-10 text-slate-900'>
+      <form onSubmit={onSubmit} className='bg-gray-500 shadow-md rounded-md py-10 px-5 mt-5 mb-10 text-slate-900'>
       <div className='mb-5'>
         <label 
           htmlFor="nombreMascota"
@@ -139,7 +167,7 @@ const Formulario = ({setPacientes}) => {
 
       <input 
         type="submit" 
-        value="Agregar Paciente" 
+        value={editPaciente.id? "Actualizar Paciente" : "Agregar Paciente" }
         className='w-full bg-indigo-600 rounded-md p-2 text-white uppercase font-bold tracking-widest hover:bg-indigo-700 cursor-pointer  transition-colors'
         />
       </form>
